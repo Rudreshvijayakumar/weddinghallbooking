@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Form</title>
+    <style>
+        label {
+            color: #dea0bd;
+        }
+        .thank-you-message {
+            display: none;
+            text-align: center;
+            font-size: 24px;
+            color: #2e8b57;
+            margin-top: 50px;
+        }
+    </style>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+</head>
+<body>
+
+    <div class="container">
+        <h1 id="feedback-heading">Customer Feedback</h1>
+        <p id="feedback-description">We value your feedback! Please take a moment to share your experience with us.</p>
+
+        <form id="feedback-form" action="#" method="POST" onsubmit="showThankYouMessage(event)">
+            
+            <!-- Name field -->
+            <div class="form-field">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+            </div>
+            
+            <!-- Phone Number field -->
+            <div class="form-field">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+            </div>
+            
+            <!-- Table Number field -->
+            <div class="form-field">
+                <label for="table">Hall Number</label>
+                <input type="number" id="table" name="table" placeholder="Enter your hall number" required>
+            </div>
+            
+            <!-- Rating field (radio buttons) -->
+            <div class="form-field">
+                <label for="rating">Rating</label><br>
+                <input type="radio" id="rating5" name="rating" value="5">
+                <label for="rating5">Excellent</label>
+                <input type="radio" id="rating4" name="rating" value="4">
+                <label for="rating4">Good</label>
+                <input type="radio" id="rating3" name="rating" value="3">
+                <label for="rating3">Average</label>
+                <input type="radio" id="rating2" name="rating" value="2">
+                <label for="rating2">Fair</label>
+                <input type="radio" id="rating1" name="rating" value="1">
+                <label for="rating1">Poor</label>
+            </div>
+
+            <!-- Suggestions field -->
+            <div class="form-field">
+                <label for="suggestions">Suggestions</label>
+                <textarea id="suggestions" name="suggestions" placeholder="Write your suggestions here..." rows="4" required></textarea>
+            </div>
+            
+            <!-- Submit Button -->
+            <button type="submit">Submit Feedback</button>
+        </form>
+
+        <div id="thank-you-message" class="thank-you-message">
+            <h1>Thank you for your feedback!</h1>
+            <p>Come back to Rhythm & Bliss!</p>
+        </div>
+    </div>
+
+    <script>
+        function showThankYouMessage(event) {
+            event.preventDefault();  // Prevent form submission to the server
+            
+            // Hide the feedback form and introductory text
+            document.getElementById('feedback-heading').style.display = 'none';
+            document.getElementById('feedback-description').style.display = 'none';
+            document.getElementById('feedback-form').style.display = 'none';
+            
+            // Show the thank you message
+            document.getElementById('thank-you-message').style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>

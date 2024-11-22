@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marriage Booking Form</title>
+    <link rel="stylesheet" href="styles.css">
+    
+
+        
+</head>
+<body>
+    <div class="container">
+        <h1>Marriage Booking Form</h1>
+        <form id="marriageBookingForm" onsubmit="submitBooking(event)">
+            <div class="form-field">
+                <label for="date">Booking Date</label>
+                <input type="date" id="date" required>
+            </div>
+            <div class="form-field">
+                <label for="name">Name</label>
+                <input type="text" id="name" placeholder="Your Name" required>
+            </div>
+            <div class="form-field">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" placeholder="10-digit Phone Number" required pattern="[0-9]{10}">
+            </div>
+            <div class="form-field">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Your Email" required>
+            </div>
+            <div class="form-field">
+                <label for="food">Food Requirement</label>
+                <select id="food" required>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+            <div class="form-field">
+                <label for="hall">Hall Preference</label>
+                <select id="hall" required>
+                    <option value="AC">AC Hall</option>
+                    <option value="Non-AC">Non-AC Hall</option>
+                </select>
+            </div>
+            <button type="submit">Book Now</button>
+            <div id="message" class="message" style="display: none;"></div>
+        </form>
+    </div>
+
+    <script>
+        // Function to handle form submission
+        function submitBooking(event) {
+            event.preventDefault();
+
+            const date = document.getElementById("date").value;
+            const name = document.getElementById("name").value;
+            const phone = document.getElementById("phone").value;
+            const email = document.getElementById("email").value;
+            const food = document.getElementById("food").value;
+            const hall = document.getElementById("hall").value;
+            const message = document.getElementById("message");
+
+            // Reset previous messages
+            message.style.display = "none";
+
+            if (date && name && phone && email && food && hall) {
+                // Booking data object
+                const booking = {
+                    date,
+                    name,
+                    phone,
+                    email,
+                    food,
+                    hall,
+                };
+
+                // Store booking details in localStorage
+                let bookings = JSON.parse(localStorage.getItem("marriageBookings")) || [];
+                bookings.push(booking);
+                localStorage.setItem("marriageBookings", JSON.stringify(bookings));
+
+                // Show success message
+                message.style.display = "block";
+                message.textContent = "Successfully booked marriage hall!";
+                message.className = "message success-message";
+
+                // Clear the form
+                document.getElementById("marriageBookingForm").reset();
+            } else {
+                // Show error message if fields are invalid
+                message.style.display = "block";
+                message.textContent = "Please fill out all the fields correctly.";
+                message.className = "message error-message";
+            }
+        }
+    </script>
+</body>
+</html>

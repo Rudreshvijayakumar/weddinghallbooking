@@ -1,0 +1,248 @@
+/* Background image and layout styling */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Georgia', serif; /* Elegant font for wedding theme */
+    background-image: url('marriage.jpg'); /* Replace with a wedding-themed image */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #f0e0d6; /* Soft, romantic text color */
+    overflow-x: hidden;
+}
+
+/* Container styling */
+.container {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.8); /* Darker background for contrast */
+    padding: 40px 60px;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 600px;
+    box-sizing: border-box;
+    margin-top: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Soft shadow effect */
+    transition: transform 0.3s ease;
+}
+
+.container:hover {
+    transform: scale(1.05); /* Slight zoom effect */
+}
+
+/* Header and paragraph styling */
+h1 {
+    font-size: 2.8vw; /* Responsive font size */
+    color: #f0e0d6;
+    margin: 0;
+    font-family: 'Georgia', serif; /* Elegant font */
+    font-weight: 700;
+}
+
+p {
+    font-size: 1.2em;
+    color: #f5edf1;
+    margin: 10px 0 20px;
+}
+
+/* Form field container styling */
+.form-field {
+    margin: 15px 0;
+    text-align: left;
+}
+
+/* Label styling */
+label {
+    font-size: 1.2em;
+    color: #f0e0d6;
+}
+
+/* AC or Non-AC field */
+select {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #d6a7c4; /* Soft pink border */
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #f0e0d6;
+    font-size: 1em;
+    appearance: none; /* Removes default dropdown arrow */
+    cursor: pointer;
+}
+
+/* Options styling in the dropdown */
+select option {
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.8); /* Dark dropdown options */
+    color: white;
+    font-size: 1em;
+    border: none;
+}
+
+/* Placeholder text styling */
+input::placeholder,
+select::placeholder {
+    color: #f0e0d6; /* Lighter placeholder text */
+}
+
+/* Focus effect for input fields */
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #d6a7c4; /* Soft pink border */
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+/* Button styling */
+button {
+    background-color:#e3b076; /* Soft pink */
+    color: white;
+    font-size: 1.2em;
+    padding: 12px 24px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 8px; /* Rounded corners for button */
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, transform 0.2s;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #f2c9b1; /* Lighter pink on hover */
+    transform: scale(1.05);
+}
+
+/* Input field styling */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+input[type="tel"],
+input[type="datetime-local"] {
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
+    border: 1px solid #d6a7c4;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #d6a7c4;
+    font-size: 1.1em;
+}
+
+/* Message styling for success and error messages */
+.message {
+    padding: 12px;
+    margin-top: 20px;
+    border-radius: 5px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.success-message {
+    font-size: 20px;
+    color: #d6a7c4; /* Soft pink for success */
+}
+
+.error-message {
+    font-size: 18px;
+    color: #f8c4b4; /* Light red for error */
+}
+
+/* Mobile responsiveness */
+@media screen and (max-width: 600px) {
+    .container {
+        width: 90%;
+        padding: 25px;
+    }
+
+    h1 {
+        font-size: 2.2em;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    input[type="number"],
+    input[type="tel"],
+    input[type="datetime-local"],
+    select {
+        font-size: 1em;
+    }
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    overflow-x: auto;
+    table-layout: fixed;
+}
+
+th {
+    background-color: #d6a7c4;
+    color: white;
+    padding: 12px 15px;
+    text-align: left;
+}
+
+td {
+    background-color: rgba(0, 0, 0, 0.7);
+    white-space: nowrap;
+    color: white;
+    padding: 12px 15px;
+    border-bottom: 1px solid #d6a7c4;
+}
+
+tr:hover td {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Styling for delete button */
+.delete-btn {
+    background-color: #d6a7c4;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    min-width: 75px;
+    white-space: nowrap;
+}
+
+.delete-btn:hover {
+    background-color: #f2c9b1;
+}
+
+/* Styling for the suggestions textarea */
+textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
+    border: 1px solid #d6a7c4;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #d6a7c4;
+    font-size: 1.1em;
+    resize: vertical;
+}
+
+/* Placeholder text styling for the textarea */
+textarea::placeholder {
+    color: #f0e0d6;
+    font-style: italic;
+}
+
+/* Focus effect for the textarea */
+textarea:focus {
+    outline: none;
+    border-color: #d6a7c4;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}

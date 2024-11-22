@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Menu Item</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="pink-heading">Add Menu Item</h1>
+        <form id="createMenuForm" onsubmit="createMenuItem(event)">
+            <div class="form-field">
+                <input type="text" id="name" placeholder="Your Name" required>
+            </div>
+            <div class="form-field">
+                <input type="tel" id="phoneNumber" placeholder="Phone Number" required pattern="[0-9]{10}">
+            </div>
+            <div class="form-field">
+                <input type="text" id="menuItemName" placeholder="Menu Item Name" required>
+            </div>
+            <div class="form-field">
+                <input type="number" id="menuItemQuantity" placeholder="Quantity" required min="1">
+            </div>
+            <div class="form-field">
+                <input type="number" id="menuItemPrice" placeholder="Price" required min="0.01" step="0.01">
+            </div>
+            <button type="submit">Add Item</button>
+
+            <!-- Success or error message will be displayed here -->
+            <div id="message" class="message" style="display: none;"></div>
+        </form>
+
+        <!-- Success message for food order booking -->
+        <div id="orderSuccessMessage" style="display: none;" class="success-message">
+            <h2>Successfully booked food order!</h2>
+        </div>
+
+        <h2>Menu Items</h2>
+        <table id="menuTable">
+            <thead>
+                <tr>
+                    <th>Item Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Menu items will be displayed here -->
+            </tbody>
+        </table>
+
+        <!-- Back to Dashboard Button -->
+        <button onclick="goBackToDashboard()" class="back-btn">Back to Dashboard</button>
+    </div>
+
+    <script>
+        // Function to add a new menu item
+        function createMenuItem(event) {
+            event.preventDefault();
+
+            const name = document.getElementById("name").value;
+            const phoneNumber = document.getElementById("phoneNumber").value;
+            const itemName = document.getElementById("menuItemName").value;
+            const quantity = document.getElementById("menuItemQuantity").value;
+            const price = document.getElementById("menuItemPrice").value;
+            const message = document.getElementById("message");
+            const orderSuccessMessage = document.getElementById("orderSuccessMessage");
+
+            // Reset any previous messages
+            message.style.display = "none";
+            orderSuccessMessage.style.display = "none"; // Hide order success message initially
+
+            if (name && phoneNumber && itemName && quantity > 0 && price > 0) {
+                // Create menu item object
+                const menuItem = {
+                    itemName: itemName,
+                    quantity: quantity,
+                    price: price
+                };
+
+                // Store the item in localStorage
+                let menuItems = JSON.parse(localStorage.getItem("menuItems")) || [];
+                menuItems.push(menuItem);
+                localStorage.setItem("menuItems", JSON.stringify(menuItems));
+
+                // Display a success message for order booking
+                orderSuccessMessage.style.display = "block";
+
+                // Hide the form after successful submission
+                document.getElementById("createMenuForm").style.display = "none";
+
+                // Reset the form fields
+                document.getElementById("createMenuForm").reset();
+
+                // Update the menu table
+                updateMenuTable();
+            } else {
+                // Display error message if inputs are invalid
+                message.style.display = "block";
+                message.textContent = "Please enter valid values for all fields.";
+                message.className = "message error-message";
+            }
+        }
+
+        // Function to delete a menu item
+        function deleteMenuItem(index) {
+            const menuItems = JSON.parse(localStorage.getItem("menuItems")) || [];
+            menuItems.splice(index, 1); // Remove the selected item
+            localStorage.setItem("menuItems", JSON.stringify(menuItems)); // Update localStorage
+            updateMenuTable(); // Refresh the table
+        }
+
+        // Function to update the menu table with all stored items
+        function updateMenuTable() {
+            const menuItems = JSON.parse(localStorage.getItem("menuItems")) || [];
+            const tableBody = document.getElementById("menuTable").getElementsByTagName("tbody")[0];
+
+            // Clear the table before updating
+            tableBody.innerHTML = "";
+
+            // Loop through the stored menu items and add them to the table
+            menuItems.forEach((item, index) => {
+                const row = document.createElement("tr");
+
+                const cellItemName = document.createElement("td");
+                cellItemName.textContent = item.itemName;
+                row.appendChild(cellItemName);
+
+                const cellQuantity = document.createElement("td");
+                cellQuantity.textContent = item.quantity;
+                row.appendChild(cellQuantity);
+
+                const cellPrice = document.createElement("td");
+                cellPrice.textContent = `Rs.${parseFloat(item.price).toFixed(2)}`;
+                row.appendChild(cellPrice);
+
+                const cellActions = document.createElement("td");
+                const deleteButton = document.createElement("button");
+                deleteButton.textContent = "Delete";
+                deleteButton.className = "delete-btn";
+                deleteButton.onclick = () => deleteMenuItem(index);
+                cellActions.appendChild(deleteButton);
+                row.appendChild(cellActions);
+
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Function to go back to the dashboard
+        function goBackToDashboard() {
+            window.location.href = "index.html"; // Redirect to the staff-dashboard page
+        }
+
+        // Initialize the table with any existing menu items on page load
+        window.onload = function() {
+            updateMenuTable();
+        };
+    </script>
+</body>
+</html>
